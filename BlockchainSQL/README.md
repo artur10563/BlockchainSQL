@@ -31,3 +31,8 @@ To use this library, you need to configure the connection to the blockchain and 
     }
   }
 }
+```
+### In order to log more info, need to register the middleware
+```bash
+app.UseMiddleware<RequestContextMiddleware>();
+```

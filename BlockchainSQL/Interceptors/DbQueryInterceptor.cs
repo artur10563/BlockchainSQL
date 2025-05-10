@@ -10,13 +10,15 @@ public class DbQueryInterceptor : DbCommandInterceptor
 {
     private readonly IBlockChainService _blockchain;
     private readonly QueryValidatorHelper _queryValidatorHelper;
+    private readonly RequestContext _requestContext;
 
     public DbQueryInterceptor(
         IBlockChainService blockchain,
-        QueryValidatorHelper queryValidatorHelper)
+        QueryValidatorHelper queryValidatorHelper, RequestContext requestContext)
     {
         _blockchain = blockchain;
         _queryValidatorHelper = queryValidatorHelper;
+        _requestContext = requestContext;
     }
 
     public override InterceptionResult<DbDataReader> ReaderExecuting(
@@ -55,7 +57,11 @@ public class DbQueryInterceptor : DbCommandInterceptor
 
         var queryInfo = new
         {
-            query = command.CommandText,
+            timestamp = DateTime.UtcNow.ToString("o"),
+            ip = _requestContext.IpAddress ?? "unknown",
+            query = simplifyQueryLogging
+                ? _requestContext.Endpoint
+                : command.CommandText,
             parameters =
                 command.Parameters.Cast<DbParameter>().Select(p => new
                 {

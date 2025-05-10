@@ -8,8 +8,9 @@ public static class DependencyInjectionExtension
 {
     public static IServiceCollection AddBlockchainSql(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<RequestContext>();
         services.Configure<BlockchainOptions>(configuration.GetSection("Blockchain"));
-        services.AddScoped<IBlockChainService, BlockchainSQL.Services.BlockChainService.BlockChainService>();
+        services.AddScoped<IBlockChainService, BlockChainService>();
         services.AddScoped<QueryValidatorHelper>();
         services.AddScoped<DbQueryInterceptor>();
         return services;

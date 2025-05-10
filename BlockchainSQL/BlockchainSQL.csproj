@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
         <PackageId>BlockchainSQL</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.2</Version>
         <Authors>artur10563</Authors>
         <Description>A library to intercept and log malicious SQL queries to the blockchain.</Description>
         <PackageTags>blockchain, sql, logging, proof_of_concept</PackageTags>
@@ -15,6 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
       <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0-preview.3.25171.5" />
