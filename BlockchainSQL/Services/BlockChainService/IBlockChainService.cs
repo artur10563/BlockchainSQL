@@ -8,6 +8,7 @@ public interface IBlockChainService
     Task<string> GetLogAsync(BigInteger index);
     Task<BigInteger> GetCountAsync();
     Task<string> AddLogAsync(string logJson);
+    Task<List<string>> GetAllLogsAsync();
 }
 
 public class BlockchainOptions
@@ -26,4 +27,5 @@ public class BlockchainFunctionNames
     public string GetLatestLog { get; set; } = "getLatestLog";
     public string GetLog { get; set; } = "getLog";
     public string GetCount { get; set; } = "getCount";
+    public string GetAllLogs { get; set; } = "getAllLogs";
 }

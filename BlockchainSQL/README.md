@@ -27,7 +27,8 @@ To use this library, you need to configure the connection to the blockchain and 
       "AddLog": "addLog",                                             // Function name for adding logs to the blockchain
       "GetLatestLog": "getLatestLog",                                  // Function name for fetching the latest log
       "GetLog": "getLog",                                              // Function name for fetching a log by index
-      "GetCount": "getCount"                                           // Function name for fetching the total count of logs
+      "GetCount": "getCount",                                           // Function name for fetching the total count of logs
+      "GetAllLogs": "getAllLogs"                                        //Function name for fetching all logs. EXPENSIVE GAS
     }
   }
 }

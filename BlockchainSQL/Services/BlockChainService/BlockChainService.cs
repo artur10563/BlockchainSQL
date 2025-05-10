@@ -49,4 +49,11 @@ public class BlockChainService : IBlockChainService
         var txHash = await function.SendTransactionAsync(_options.AccountAddress, gas, null, null, logJson);
         return txHash;
     }
+
+    public async Task<List<string>> GetAllLogsAsync()
+    {
+        var function = _contract.GetFunction(_options.Functions.GetAllLogs);
+        var logs = await function.CallAsync<string[]>();
+        return logs.ToList();
+    }
 }
