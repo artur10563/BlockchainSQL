@@ -1,0 +1,8 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea/.idea.BlockchainSQL/.idea/indexLayout.xml
+.idea/.idea.BlockchainSQL/.idea/vcs.xml
+.idea/.idea.BlockchainSQL/.idea/encodings.xml

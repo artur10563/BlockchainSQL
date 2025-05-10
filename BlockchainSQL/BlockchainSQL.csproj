@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <PackageId>BlockchainSQL</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>artur10563</Authors>
+        <Description>A library to intercept and log malicious SQL queries to the blockchain.</Description>
+        <PackageTags>blockchain, sql, logging, proof_of_concept</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0-preview.3.25171.5" />
+      <PackageReference Include="Nethereum.Web3" Version="4.29.0" />
+      <None Include="README.md" Pack="true" PackagePath="/" />
+
+    </ItemGroup>
+    
+
+</Project>
