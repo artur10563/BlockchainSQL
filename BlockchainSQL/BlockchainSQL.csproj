@@ -6,13 +6,14 @@
         <Nullable>enable</Nullable>
 
         <PackageId>BlockchainSQL</PackageId>
-        <Version>1.0.7</Version>
+        <Version>1.0.8</Version>
         <Authors>artur10563</Authors>
         <Description>A library to intercept and log malicious SQL queries to the blockchain.</Description>
         <PackageTags>blockchain, sql, logging, proof_of_concept</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/artur10563/BlockchainSQL</RepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>

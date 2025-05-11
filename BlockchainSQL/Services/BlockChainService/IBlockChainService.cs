@@ -18,6 +18,7 @@ public class BlockchainOptions
     public string PrivateKey { get; set; } = "";
     public string ContractAddress { get; set; } = "";
     public string AccountAddress { get; set; } = "";
+    public bool SimplifyQueryLogging { get; set; } = false;
     public BlockchainFunctionNames Functions { get; set; } = new();
 }
 
