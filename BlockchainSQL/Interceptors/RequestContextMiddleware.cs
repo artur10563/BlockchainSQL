@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace BlockchainSQL.Interceptors;
 
-public class RequestCultureMiddleware
+public class RequestContextMiddleware
 {
     private readonly RequestDelegate _next;
 
-    public RequestCultureMiddleware(RequestDelegate next)
+    public RequestContextMiddleware(RequestDelegate next)
     {
         _next = next;
     }

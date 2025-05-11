@@ -6,3 +6,5 @@ riderModule.iml
 .idea/.idea.BlockchainSQL/.idea/indexLayout.xml
 .idea/.idea.BlockchainSQL/.idea/vcs.xml
 .idea/.idea.BlockchainSQL/.idea/encodings.xml
+BlockchainSQL.Web/appsettings.Development.json
+.idea/config/applicationhost.config

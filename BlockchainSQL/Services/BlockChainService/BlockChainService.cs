@@ -42,8 +42,7 @@ public class BlockChainService : IBlockChainService
 
     public async Task<string> AddLogAsync(string logJson)
     {
-        var account = new Nethereum.Web3.Accounts.Account(_options.PrivateKey);
-        var web3 = new Web3(account, _options.RpcUrl);
+        var web3 = GetSigningWeb3();
         var function = web3.Eth.GetContract(_options.Abi, _options.ContractAddress).GetFunction(_options.Functions.AddLog);
         var gas = await function.EstimateGasAsync(_options.AccountAddress, null, null, logJson);
         var txHash = await function.SendTransactionAsync(_options.AccountAddress, gas, null, null, logJson);
@@ -52,8 +51,9 @@ public class BlockChainService : IBlockChainService
 
     public async Task<List<string>> GetAllLogsAsync()
     {
+        
         var function = _contract.GetFunction(_options.Functions.GetAllLogs);
-        var logs = await function.CallAsync<string[]>();
-        return logs.ToList();
+        var logs = await function.CallAsync<List<string>>();
+        return logs;
     }
 }
