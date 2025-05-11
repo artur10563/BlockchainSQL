@@ -21,34 +21,37 @@ public class DbQueryInterceptor : DbCommandInterceptor
         _requestContext = requestContext;
     }
 
-    public override InterceptionResult<DbDataReader> ReaderExecuting(
+    public override async ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(
         DbCommand command,
         CommandEventData eventData,
-        InterceptionResult<DbDataReader> result)
+        InterceptionResult<DbDataReader> result,
+        CancellationToken cancellationToken = new CancellationToken())
     {
-        ValidateDbCall(command);
-        return base.ReaderExecuting(command, eventData, result);
+        await ValidateDbCallAsync(command);
+        return await base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
     }
 
-    public override InterceptionResult<int> NonQueryExecuting(
+    public override async ValueTask<InterceptionResult<int>> NonQueryExecutingAsync(
         DbCommand command,
         CommandEventData eventData,
-        InterceptionResult<int> result)
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = new CancellationToken())
     {
-        ValidateDbCall(command);
-        return base.NonQueryExecuting(command, eventData, result);
+        await ValidateDbCallAsync(command);
+        return await base.NonQueryExecutingAsync(command, eventData, result, cancellationToken);
     }
 
-    public override InterceptionResult<object> ScalarExecuting(
+    public override async ValueTask<InterceptionResult<object>> ScalarExecutingAsync(
         DbCommand command,
         CommandEventData eventData,
-        InterceptionResult<object> result)
+        InterceptionResult<object> result,
+        CancellationToken cancellationToken = new CancellationToken())
     {
-        ValidateDbCall(command);
-        return base.ScalarExecuting(command, eventData, result);
+        await ValidateDbCallAsync(command);
+        return await base.ScalarExecutingAsync(command, eventData, result, cancellationToken);
     }
-
-    private void ValidateDbCall(DbCommand command, bool simplifyQueryLogging = false)
+    
+    private async Task ValidateDbCallAsync(DbCommand command, bool simplifyQueryLogging = false)
     {
         var hasMaliciousParam = command.Parameters.Cast<DbParameter>()
             .Any(p => _queryValidatorHelper.IsSuspiciousParam(p.Value?.ToString()));
@@ -73,6 +76,6 @@ public class DbQueryInterceptor : DbCommandInterceptor
 
         var jsonString = JsonSerializer.Serialize(queryInfo);
 
-        _blockchain.AddLogAsync(jsonString);
+        await _blockchain.AddLogAsync(jsonString);
     }
 }
