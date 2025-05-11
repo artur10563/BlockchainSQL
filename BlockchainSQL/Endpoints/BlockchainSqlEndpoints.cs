@@ -3,6 +3,7 @@ using BlockchainSQL.Services.BlockChainService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using System.Text.Json;
 
 namespace BlockchainSQL.Web.Endpoints;
 
@@ -14,29 +15,31 @@ public static class BlockchainSqlEndpoints
 
         group.MapGet("/latest", async (IBlockChainService _blockchain) =>
         {
-            var log = await _blockchain.GetLatestLogAsync();
+            var dlog = await _blockchain.GetLatestLogAsync();
+            var log = JsonSerializer.Deserialize<LogEntry>(dlog);
             return Results.Ok(log);
         });
-        
+
         group.MapGet("", async (IBlockChainService _blockchain) =>
         {
-            var logs = await _blockchain.GetAllLogsAsync();
+            var dlogs = await _blockchain.GetAllLogsAsync();
+            var logs = dlogs.Select(log => JsonSerializer.Deserialize<LogEntry>(log)).ToList();
             return Results.Ok(logs);
         });
-        
+
         group.MapGet("/{index}", async (IBlockChainService _blockchain, BigInteger index) =>
         {
-            var log = await _blockchain.GetLogAsync(index);
+            var dlog = await _blockchain.GetLogAsync(index);
+            var log = JsonSerializer.Deserialize<LogEntry>(dlog);
             return Results.Ok(log);
         });
-        
+
         group.MapGet("/count", async (IBlockChainService _blockchain) =>
         {
             var count = await _blockchain.GetCountAsync();
             return Results.Ok(count);
         });
-        
-        
+
 
         return app;
     }

@@ -3,7 +3,6 @@ using System.Text.Json;
 using BlockchainSQL.Helpers;
 using BlockchainSQL.Services.BlockChainService;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
 
 namespace BlockchainSQL.Interceptors;
 
@@ -101,20 +100,20 @@ public class DbQueryInterceptor : DbCommandInterceptor
 
     private string BuildLogJson(DbCommand command)
     {
-        var log = new
+        var log = new LogEntry()
         {
-            timestamp = DateTime.UtcNow.ToString("o"),
-            ip = _requestContext.IpAddress ?? "unknown",
-            query = _simplifyQueryLogging ? "" : command.CommandText,
-            endpoint = _requestContext.Endpoint,
-            parameters = command.Parameters.Cast<DbParameter>().Select(p => new
+            Timestamp = DateTime.UtcNow.ToString("o"),
+            Ip = _requestContext.IpAddress ?? "unknown",
+            Query = _simplifyQueryLogging ? "" : command.CommandText,
+            Endpoint = _requestContext.Endpoint ?? "unknown",
+            Parameters = command.Parameters.Cast<DbParameter>().Select(p=>new Parameter()
             {
-                p.DbType,
-                p.ParameterName,
-                p.Value
+                DbType = p.DbType.ToString(),
+                ParameterName = p.ParameterName,
+                Value = p.Value?.ToString() ?? string.Empty
             }).ToList()
         };
-
+        
         return JsonSerializer.Serialize(log);
     }
 

@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
         <PackageId>BlockchainSQL</PackageId>
-        <Version>1.0.8</Version>
+        <Version>1.0.9</Version>
         <Authors>artur10563</Authors>
         <Description>A library to intercept and log malicious SQL queries to the blockchain.</Description>
         <PackageTags>blockchain, sql, logging, proof_of_concept</PackageTags>

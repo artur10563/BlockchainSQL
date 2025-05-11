@@ -30,3 +30,19 @@ public class BlockchainFunctionNames
     public string GetCount { get; set; } = "getCount";
     public string GetAllLogs { get; set; } = "getAllLogs";
 }
+
+public class LogEntry
+{
+    public string Timestamp { get; set; }
+    public string Ip { get; set; }
+    public string Query { get; set; }
+    public string Endpoint { get; set; }
+    public List<Parameter> Parameters { get; set; }
+}
+
+public class Parameter
+{
+    public string DbType { get; set; }
+    public string ParameterName { get; set; }
+    public string Value { get; set; }
+}
